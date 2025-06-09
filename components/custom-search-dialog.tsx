@@ -7,7 +7,7 @@ export default function CustomSearchDialog(props: SharedProps) {
   return (
     <SearchDialog
       api="/api/vector-store"
-      delayMs={100}
+      delayMs={200}
       {...props}
     />
   );
