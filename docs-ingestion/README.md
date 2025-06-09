@@ -1,1 +1,0 @@
-# nextjs-docs-ingest

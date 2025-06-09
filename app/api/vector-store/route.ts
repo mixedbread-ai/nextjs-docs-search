@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import mxbai from "@/lib/mxbai";
+import { mxbai } from "@/lib/mxbai";
 import { ScoredVectorStoreFile } from "@mixedbread/sdk/resources/vector-stores/files";
 
 interface SearchMetadata {
@@ -10,7 +10,7 @@ interface SearchMetadata {
   scraped_date?: string;
   file_path?: string;
   file_name?: string;
-  [key: string]: any;
+  [key: string]: string | number | undefined;
 }
 
 export async function GET(request: NextRequest) {
