@@ -1,45 +1,100 @@
-# next-docs-search
+# Next.js Documentation Search Demo
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+## Quick Demo Setup
 
-Run development server:
+### 1. Clone & Install
+
+```bash
+git clone <repo-url>
+cd nextjs-docs-search
+npm install
+```
+
+### 2. Install Mixedbread CLI
+
+```bash
+npm install -g @mixedbread/cli
+```
+
+### 3. Create Vector Store
+
+```bash
+# Set your API key
+export MXBAI_API_KEY=your_api_key_here
+
+# Create vector store with a unique name
+mxbai vs create "Nextjs Docs" --description "Demo documentation search"
+
+# Get the vector store ID
+mxbai vs list
+```
+
+### 4. Environment Setup
+
+Create `.env.local`:
+
+```env
+MXBAI_API_KEY=your_api_key_here
+VECTOR_STORE_ID=your_vector_store_id_here
+```
+
+### 5. Upload Content
+
+```bash
+# Upload all documentation files
+mxbai vs sync "Nextjs Docs" "**/*.md" "content/**/*.md"
+```
+
+### 6. Test Sync
+
+```bash
+# Preview what would sync
+npm run sync-content:dry-run
+
+# Test automatic sync (only changed files)
+npm run sync-content
+```
+
+### 7. Run Demo
 
 ```bash
 npm run dev
-# or
-pnpm dev
-# or
-yarn dev
 ```
 
-Open http://localhost:3000 with your browser to see the result.
+Visit `http://localhost:3000` and test the semantic search.
 
-## Explore
+## Deployment (Vercel)
 
-In the project, you can see:
+When deployed, the build script automatically syncs content:
 
-- `lib/source.ts`: Code for content source adapter, [`loader()`](https://fumadocs.dev/docs/headless/source-api) provides the interface to access your content.
-- `app/layout.config.tsx`: Shared options for layouts, optional but preferred to keep.
+**package.json:**
 
-| Route                     | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `app/(home)`              | The route group for your landing page and other pages. |
-| `app/docs`                | The documentation layout and pages.                    |
-| `app/api/search/route.ts` | The Route Handler for search.                          |
+```json
+{
+  "build": "next build && npm run sync-content"
+}
+```
 
-### Fumadocs MDX
+**Environment Variables on Vercel:**
 
-A `source.config.ts` config file has been included, you can customise different options like frontmatter schema.
+- `MXBAI_API_KEY`
+- `VECTOR_STORE_ID`
 
-Read the [Introduction](https://fumadocs.dev/docs/mdx) for further details.
+The sync command uses hash-based change detection for efficient CI/CD deployment.
 
-## Learn More
+## Commands Reference
 
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
+```bash
+# Development
+npm run dev                    # Start dev server
+npm run build                 # Build + sync content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.vercel.app) - learn about Fumadocs
+# Content Sync
+npm run sync-content          # Sync changed files (CI optimized)
+npm run sync-content:dry-run  # Preview changes
+npm run sync-content:force    # Force sync all files
+
+# Vector Store Management
+mxbai vs list                 # List vector stores
+mxbai vs get "Nextjs Docs"    # Get store details
+```
