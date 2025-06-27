@@ -23,7 +23,7 @@ npm install -g @mixedbread/cli
 export MXBAI_API_KEY=your_api_key_here
 
 # Create vector store with a unique name
-mxbai vs create "Nextjs Docs" --description "Demo documentation search"
+mxbai vs create "your-vs-name" --description "Demo documentation search"
 
 # Get the vector store ID
 mxbai vs list
@@ -42,7 +42,7 @@ VECTOR_STORE_ID=your_vector_store_id_here
 
 ```bash
 # Upload all documentation files
-mxbai vs sync "Nextjs Docs" "**/*.md" "content/**/*.md"
+mxbai vs sync "your-vs-name" "**/*.md" "content/**/*.md"
 ```
 
 ### 6. Test Sync
@@ -96,5 +96,5 @@ npm run sync-content:force    # Force sync all files
 
 # Vector Store Management
 mxbai vs list                 # List vector stores
-mxbai vs get "Nextjs Docs"    # Get store details
+mxbai vs get "your-vs-name"    # Get store details
 ```
