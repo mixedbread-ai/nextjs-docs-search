@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "next build && npm run sync-content",
     "dev": "next dev --turbo",
     "start": "next start",
     "postinstall": "fumadocs-mdx",
@@ -12,7 +12,7 @@
     "sync-content:force": "mxbai vs sync \"Nextjs Docs\" \"content/**/*.md\" --force --strategy high_quality"
   },
   "dependencies": {
-    "@mixedbread/cli": "0.2.3",
+    "@mixedbread/cli": "0.5.0",
     "@mixedbread/sdk": "^0.11.0",
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
