@@ -1,6 +1,3 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-
 export default function HomePage() {
   return (
     <main className="flex flex-1 flex-col justify-center text-center bg-fd-background px-6">

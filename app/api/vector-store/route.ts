@@ -46,36 +46,27 @@ export async function GET(request: NextRequest) {
     return acc;
   }, [] as (ScoredTextInputChunk | ScoredImageURLInputChunk | ScoredAudioURLInputChunk | ScoredVideoURLInputChunk)[]);
 
-  const fumaStructuredResponse = uniqueResults.flatMap(
-    (
-      item:
-        | ScoredTextInputChunk
-        | ScoredImageURLInputChunk
-        | ScoredAudioURLInputChunk
-        | ScoredVideoURLInputChunk,
-      index: number
-    ) => {
-      const metadata = item.generated_metadata as SearchMetadata;
-      const url = metadata?.source_url || "";
-      const description = metadata?.path || "";
-      const title = metadata?.title || "Untitled";
+  const fumaStructuredResponse = uniqueResults.flatMap((item, index) => {
+    const metadata = item.generated_metadata as SearchMetadata;
+    const url = metadata?.source_url || "";
+    const description = metadata?.path || "";
+    const title = metadata?.title || "Untitled";
 
-      return [
-        {
-          id: `result-${index}-page`,
-          url: url,
-          type: "page",
-          content: title,
-        },
-        {
-          id: `result-${index}-text`,
-          url: url,
-          type: "text",
-          content: description,
-        },
-      ];
-    }
-  );
+    return [
+      {
+        id: `result-${index}-page`,
+        url: url,
+        type: "page",
+        content: title,
+      },
+      {
+        id: `result-${index}-text`,
+        url: url,
+        type: "text",
+        content: description,
+      },
+    ];
+  });
 
   return NextResponse.json(fumaStructuredResponse);
 }
