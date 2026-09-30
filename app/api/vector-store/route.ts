@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { mxbai } from "@/lib/mxbai";
-import {
-  ScoredAudioURLInputChunk,
-  ScoredImageURLInputChunk,
-  ScoredTextInputChunk,
-  ScoredVideoURLInputChunk,
-} from "@mixedbread/sdk/resources/vector-stores";
+import type { StoreSearchResponse } from "@mixedbread/sdk/resources/stores";
 
 interface SearchMetadata {
   title?: string;
@@ -15,7 +10,7 @@ interface SearchMetadata {
 }
 
 export async function GET(request: NextRequest) {
-  if (!process.env.MXBAI_API_KEY || !process.env.VECTOR_STORE_ID) {
+  if (!process.env.MXBAI_API_KEY || !process.env.STORE_ID) {
     return NextResponse.json(
       { error: "Environment setup failed" },
       { status: 500 }
@@ -29,9 +24,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Query is required" }, { status: 400 });
   }
 
-  const res = await mxbai.vectorStores.search({
+  const res = await mxbai.stores.search({
     query,
-    vector_store_identifiers: [process.env.VECTOR_STORE_ID],
+    store_identifiers: [process.env.STORE_ID],
     top_k: 10,
     search_options: {
       return_metadata: true,
@@ -44,7 +39,7 @@ export async function GET(request: NextRequest) {
       acc.push(item);
     }
     return acc;
-  }, [] as (ScoredTextInputChunk | ScoredImageURLInputChunk | ScoredAudioURLInputChunk | ScoredVideoURLInputChunk)[]);
+  }, [] as StoreSearchResponse.Data[]);
 
   const fumaStructuredResponse = uniqueResults.flatMap((item, index) => {
     const metadata = item.generated_metadata as SearchMetadata;
