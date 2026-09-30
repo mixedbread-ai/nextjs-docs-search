@@ -16,17 +16,17 @@ npm install
 npm install -g @mixedbread/cli
 ```
 
-### 3. Create Vector Store
+### 3. Create a Store
 
 ```bash
 # Set your API key
 export MXBAI_API_KEY=your_api_key_here
 
-# Create vector store with a unique name
-mxbai vs create "your-vs-name" --description "Demo documentation search"
+# Create a store with a unique name
+mxbai store create "your-store-name" --description "Demo documentation search"
 
-# Get the vector store ID
-mxbai vs list
+# Get the store ID
+mxbai store list
 ```
 
 ### 4. Environment Setup
@@ -35,14 +35,14 @@ Create `.env.local`:
 
 ```env
 MXBAI_API_KEY=your_api_key_here
-VECTOR_STORE_ID=your_vector_store_id_here
+STORE_ID=your_store_id_here
 ```
 
 ### 5. Upload Content
 
 ```bash
 # Upload all documentation files
-mxbai vs sync "your-vs-name" "**/*.md" "content/**/*.md"
+mxbai store sync "your-store-name" "**/*.md" "content/**/*.md"
 ```
 
 ### 6. Test Sync
@@ -78,7 +78,7 @@ When deployed, the build script automatically syncs content:
 **Environment Variables on Vercel:**
 
 - `MXBAI_API_KEY`
-- `VECTOR_STORE_ID`
+- `STORE_ID`
 
 The sync command uses hash-based change detection for efficient CI/CD deployment.
 
@@ -94,7 +94,7 @@ npm run sync-content          # Sync changed files (CI optimized)
 npm run sync-content:dry-run  # Preview changes
 npm run sync-content:force    # Force sync all files
 
-# Vector Store Management
-mxbai vs list                 # List vector stores
-mxbai vs get "your-vs-name"    # Get store details
+# Store Management
+mxbai store list              # List stores
+mxbai store get "your-store-name" # Get store details
 ```

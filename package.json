@@ -7,13 +7,13 @@
     "dev": "next dev --turbo",
     "start": "next start",
     "postinstall": "fumadocs-mdx",
-    "sync-content": "mxbai vs sync \"Nextjs Docs\" \"content/**/*.md\" --ci --strategy fast",
-    "sync-content:dry-run": "mxbai vs sync \"Nextjs Docs\" \"content/**/*.md\" --dry-run",
-    "sync-content:force": "mxbai vs sync \"Nextjs Docs\" \"content/**/*.md\" --force --strategy high_quality"
+    "sync-content": "mxbai store sync \"Nextjs Docs\" \"content/**/*.md\" --yes --strategy fast",
+    "sync-content:dry-run": "mxbai store sync \"Nextjs Docs\" \"content/**/*.md\" --dry-run",
+    "sync-content:force": "mxbai store sync \"Nextjs Docs\" \"content/**/*.md\" --force --yes --strategy high_quality"
   },
   "dependencies": {
-    "@mixedbread/cli": "0.5.0",
-    "@mixedbread/sdk": "^0.11.0",
+    "@mixedbread/cli": "^2.4.0",
+    "@mixedbread/sdk": "^0.78.0",
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

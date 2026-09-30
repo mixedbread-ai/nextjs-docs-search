@@ -6,12 +6,12 @@ export default function HomePage() {
         <p className="text-xl text-muted-foreground">
           Powered by{" "}
           <a
-            href="https://www.mixedbread.com/docs/vector-stores/overview"
+            href="https://www.mixedbread.com/docs/stores/overview"
             target="_blank"
             rel="noopener noreferrer"
             className="underline"
           >
-            Mixedbread Vector Stores
+            Mixedbread Stores
           </a>
         </p>
         <p className="text-xl text-muted-foreground">
